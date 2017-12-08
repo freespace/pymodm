@@ -85,6 +85,7 @@ class MongoBaseField(object):
         if inst is not None and isinstance(inst, MongoModelBase):
             raw_value = inst._data.get(self.attname, self.get_default())
             if self.is_blank(raw_value):
+                self.__set__(inst, raw_value)
                 return raw_value
             # Cache pythonized value.
             python_value = self.to_python(raw_value)
